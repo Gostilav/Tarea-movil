@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #e9f7ff; 
+            color: #333; 
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #343a40;
+            text-align: center;
+            background-color: #007bff; 
+            color: white; 
+            padding: 10px; 
+            border-radius: 0.5rem;
+        }
+        .list-group-item {
+            font-size: 1.1rem;
+        }
+        .btn-danger {
+            background-color: #ff0019; 
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #ff0019; 
+        }
+        .btn-success {
+            background-color: #28a745; 
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #218838; 
+        }
+        .card {
+            border-radius: 0.5rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff; 
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        /* Botón de "Registrar tus Productos" */
+        #btnRegisterProducts {
+            background-color: #007d06; 
+            border: none;
+            margin-top: 15px;
+            color: white; 
+        }
+        #btnRegisterProducts:hover {
+            background-color: #0056b3; 
+        }
+        /* Botón de "Agregar Imagen" */
+        #btnAddImage {
+            background-color: #6c757d;
+            border: none;
+            margin-top: 15px;
+            color: white;
+        }
+        #btnAddImage:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2>Bienvenido Administrador</h2>
+                <hr>
+                <div class="list-group">
+                    <button id="btnCreateUser" class="list-group-item list-group-item-action">Crear Usuario</button>
+                    <button id="btnRecoverPassword" class="list-group-item list-group-item-action">Recuperar Clave</button>
+                    <button id="btnLogout" class="list-group-item list-group-item-action btn-danger text-white">Cerrar Sesión</button>
+                    <button id="btnRegisterProducts" class="list-group-item list-group-item-action">Registrar tus Productos</button>
+                    <button id="btnRegCity" class="list-group-item list-group-item-action">RegCity</button>
+                    <button id="btnAddImage" class="list-group-item list-group-item-action">Agregar Imagen</button> <!-- Nuevo botón "Agregar Imagen" -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script>
+        document.getElementById('btnCreateUser').addEventListener('click', function() {
+            window.location.href = '/Templates/Admin/create_user.html'; // Ruta corregida
+        });
+
+        document.getElementById('btnRecoverPassword').addEventListener('click', function() {
+            window.location.href = '/Templates/Admin/recover_password.html'; // Ruta corregida
+        });
+
+        document.getElementById('btnLogout').addEventListener('click', function() {
+            window.location.href = '/index.html'; // Redirige a index.html en la ruta correcta
+        });
+
+        // función para redirigir a registrar_productos.html
+        document.getElementById('btnRegisterProducts').addEventListener('click', function() {
+            window.location.href = '/Templates/Admin/registrar_producto.html'; // Redirige a registrar_productos.html
+        });
+
+        // función para redirigir a regcity.html
+        document.getElementById('btnRegCity').addEventListener('click', function() {
+            window.location.href = 'regcity.html';
+        });
+
+        // función para redirigir a save_url.html cuando se presione el botón "Agregar Imagen"
+        document.getElementById('btnAddImage').addEventListener('click', function() {
+            window.location.href = 'save_url.html'; // Redirige a save_url.html
+        });
+    </script>
+    
+</body>
+</html>

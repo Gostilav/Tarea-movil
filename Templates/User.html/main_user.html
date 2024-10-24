@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f9f9f9; 
+            color: #333; 
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #343a40;
+        }
+        .list-group-item {
+            font-size: 1.1rem;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .card {
+            border-radius: 0.5rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .image-container {
+            display: none;
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 200px;
+            margin: 10px;
+        }
+        #btnViewImages {
+            background-color: #28a745; /* Verde */
+            color: white;
+        }
+        #btnViewImages:hover {
+            background-color: #218838; /* Verde oscuro al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="text-center">Bienvenido Usuario</h2>
+                <hr>
+                <div class="list-group">
+                    <button id="btnRegisterProduct" class="list-group-item list-group-item-action btn-primary text-white">Registrar Productos</button>
+                    <button id="btnViewImages" class="list-group-item list-group-item-action">Ver Imágenes</button>
+                    <button id="btnRecoverPassword" class="list-group-item list-group-item-action">Recuperar Clave</button>
+                    <button id="btnLogout" class="list-group-item list-group-item-action btn-danger text-white">Cerrar Sesión</button>
+                </div>
+                <!-- Contenedor para las imágenes -->
+                <div id="imageContainer" class="image-container">
+                    <h4 class="text-center">Imágenes Subidas</h4>
+                    <div class="d-flex justify-content-center flex-wrap" id="imageGallery">
+                        <!-- Las imágenes se cargarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script type="module">
+        import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js';
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js';
+
+        // Configuración de Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBplr69UVqaFwmW0sOegvjHEBbl72wilvU",
+            authDomain: "taller-49dd8.firebaseapp.com",
+            projectId: "taller-49dd8",
+            storageBucket: "taller-49dd8.appspot.com",
+            messagingSenderId: "84011756521",
+            appId: "1:84011756521:web:47e278618f145885c57978",
+        };
+
+        // Inicializar Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        document.getElementById('btnRegisterProduct').addEventListener('click', function() {
+            window.location.href = 'user_productos.html'; 
+        });
+
+        document.getElementById('btnRecoverPassword').addEventListener('click', function() {
+            window.location.href = 'recover_password.html'; 
+        });
+
+        document.getElementById('btnLogout').addEventListener('click', function() {
+            window.location.href = '/index.html'; 
+        });
+
+        // Funcionalidad para mostrar/ocultar el contenedor de imágenes
+        document.getElementById('btnViewImages').addEventListener('click', async function() {
+            const imageContainer = document.getElementById('imageContainer');
+            const imageGallery = document.getElementById('imageGallery');
+
+            // Limpiar imágenes existentes
+            imageGallery.innerHTML = '';
+
+            if (imageContainer.style.display === 'none' || imageContainer.style.display === '') {
+                imageContainer.style.display = 'block';
+
+                // Obtener imágenes de Firestore
+                const querySnapshot = await getDocs(collection(db, "estados")); // Asegúrate de que "estados" sea el nombre correcto de tu colección
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const imgElement = document.createElement('img');
+                    imgElement.src = data.urlcountry; // Asegúrate de que 'urlcountry' es el campo correcto
+                    imgElement.alt = data.name;
+                    imgElement.className = 'img-thumbnail';
+                    imageGallery.appendChild(imgElement);
+                });
+            } else {
+                imageContainer.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
